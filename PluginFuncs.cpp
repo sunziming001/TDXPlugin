@@ -40,7 +40,7 @@ void B1ColseVolumeCheck(int cnt, float* output, float* high, float* close, float
 		highestIdx = findHighest(high, cnt, cnt - obsWidth, cnt-1);
 		if (highestIdx >= 0 && highestIdx<cnt-1)
 		{
-			for (int i = highestIdx+1; i < cnt - 1; i++)
+			for (int i = highestIdx+1; i <= cnt - 1; i++)
 			{
 				curClose = close[i];
 				curVolume = volume[i];
@@ -48,9 +48,10 @@ void B1ColseVolumeCheck(int cnt, float* output, float* high, float* close, float
 				preVolume = volume[i - 1];
 				if (curClose < preClose)	//ÒõÁ¿
 				{
-					if (curVolume <= preVolume)
+					if (curVolume <= 1.00f*preVolume)
 					{
 						output[i] = 1.0f;
+						
 					}
 					else {
 						output[i] = 0.0f;

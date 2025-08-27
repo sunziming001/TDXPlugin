@@ -5,5 +5,6 @@
 4. 新建一个条件选股公式，不需要额外参数, 代码如下：
 <pre>
 RET:=TDXDLL1(1,HIGH,CLOSE,VOL);
-REF(RET,0)==1.0;
+RET2:=TDXDLL1(2,HIGH,LOW,CLOSE);
+REF(RET,0)==1.0 AND REF(RET2,0)>=3.0;
 </pre>

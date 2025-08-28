@@ -3,10 +3,14 @@
 #include "PluginFuncs.h"
 
 //¼ÓÔØµÄº¯Êý
-PluginTCalcFuncInfo g_CalcFuncSets[3] =
+PluginTCalcFuncInfo g_CalcFuncSets[] =
 {
-	{1,(pPluginFUNC)&B1ColseVolumeCheck},
+	{1,(pPluginFUNC)&B1ColseVolumeView},
 	{2,(pPluginFUNC)&LoseShareRate},
+	{3,(pPluginFUNC)&B1ColseVolumeCheck},
+	{100,(pPluginFUNC)&SetArgs0_1_2},
+	{101,(pPluginFUNC)&SetArgs3_4_5},
+	{102,(pPluginFUNC)&SetArgs6_7_8},
 	{0,NULL}
 };
 

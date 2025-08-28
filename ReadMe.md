@@ -5,6 +5,11 @@
 4. 新建一个条件选股公式，不需要额外参数, 代码如下：
 <pre>
 RET:=TDXDLL1(1,HIGH,CLOSE,VOL);
-RET2:=TDXDLL1(2,HIGH,LOW,CLOSE);
+RET2:=TDXDLL1(2,HIGH,LOW,CLOSE);   
 REF(RET,0)==1.0 AND REF(RET2,0)>=3.0;
+</pre>
+5. 新建一个盈亏比查看公式，代码如下,其中N1为预设参数，表示止损百分比:
+<pre>
+NT:=TDXDLL1(100,N1,0,0);
+TDXDLL1(2,HIGH,LOW,CLOSE) COLORRED;
 </pre>

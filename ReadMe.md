@@ -16,10 +16,10 @@ NT:=TDXDLL1(100,N1,0,0);
 TDXDLL1(2,HIGH,LOW,CLOSE) COLORRED;
 </pre>
 6. B1选股公式</br>
-N 0~100	 9</br>
-M1 0~100 3</br>
-M2 0~100 3</br>
-M3 0~100 13</br>
+N 0,100	 9</br>
+M1 0,100 3</br>
+M2 0,100 3</br>
+M3 0,100 13</br>
 <pre>
 MN1:=14;
 MN2:=28;

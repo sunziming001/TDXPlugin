@@ -1,7 +1,7 @@
 #include "PluginFuncs.h"
 
 
-static GlobalArgument g_arg[9] = { 0.0f };
+static GlobalArgument g_arg[9];
 
 
 void resetAllArgs()
@@ -184,6 +184,8 @@ void B1ColseVolumeView(int cnt, float* output, float* high, float* close, float*
 	float preClose = 0.0f;
 	float preVolume = 0.0f;
 	float deviation = 1.10f;
+	float minVolumRate = 0.33f;
+	float curHighVolume = 0.0f;
 	int transactionCnt = 0;
 	int transactionObsWidth = 10;
 	int minTransactionCnt = 4;
@@ -253,16 +255,13 @@ void B1ColseVolumeCheck(int cnt, float* output, float* high, float* close, float
 	float preClose = 0.0f;
 	float preVolume = 0.0f;
 	float deviation = 1.10f;
+	float minVolumRate = 0.33f;
+	float curHighVolume = 0.0f;
 	int transactionCnt = 0;
 	int transactionObsWidth = 10;
 	int minTransactionCnt = 4;
 
 	resetOutput(output, cnt);
-
-	if (g_arg[0].data[0] != 0.0f)
-	{
-		deviation = g_arg[0].data[0];
-	}
 
 	if (g_arg[0].data[0] != 0.0f)
 	{
@@ -279,6 +278,11 @@ void B1ColseVolumeCheck(int cnt, float* output, float* high, float* close, float
 		minTransactionCnt = static_cast<int>(g_arg[2].data[0]);
 	}
 
+	if (g_arg[3].data[0] != 0.0f)
+	{
+		minVolumRate = g_arg[3].data[0];
+	}
+
 	for (int j = cnt - 1; j >= 0; j--)
 	{
 		highestIdx = findPreHighest(high, cnt, j - obsWidth, j);
@@ -287,6 +291,7 @@ void B1ColseVolumeCheck(int cnt, float* output, float* high, float* close, float
 		j = highestIdx;
 		if (highestIdx >= 0 && highestIdx < cnt-1)
 		{
+			curHighVolume = volume[highestIdx];
 			for (int i = highestIdx + 1; i <= lastHighestIdx; i++)
 			{
 				curClose = close[i];
@@ -298,7 +303,6 @@ void B1ColseVolumeCheck(int cnt, float* output, float* high, float* close, float
 					if (curVolume <= deviation * preVolume && transactionCnt >= minTransactionCnt)
 					{
 						output[i] = 1.0f;
-
 					}
 					else {
 						output[i] = 0.0f;
@@ -307,6 +311,18 @@ void B1ColseVolumeCheck(int cnt, float* output, float* high, float* close, float
 				}
 				else {						//阳量
 					output[i] = 1.0f;
+				}
+
+				if (i == lastHighestIdx)	//检查最后一根k线
+				{
+					if (volume[i] <= minVolumRate * curHighVolume
+						&& output[i] != 0.0f)
+					{
+						output[i] = 1.0f;
+					}
+					else {
+						output[i] = 0.0f;
+					}
 				}
 			}
 		}

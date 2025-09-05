@@ -22,7 +22,6 @@ void SetArgs6_7_8(int cnt, float* output, float* arg6, float* arg7, float* arg8)
 @param arg0 阴量缩量偏差，默认为1.1
 @param arg1 新高前的异动观察周期，默认为10
 @param arg2 新高前的异动最低次数，默认为4
-@param arg3 最后一个周期比前高量的缩量比例，默认为0.33
 */
 void B1ColseVolumeView(int cnt, float* output, float* high, float* close, float* volume);
 

@@ -132,7 +132,7 @@ int calcTransactionCnt(float* volume, int cnt, int idx, int dur,int obsWidth)
 	float tmpAverage = 0.0f;
 	for (int i = idx - obsWidth + 1; i <= idx; i++)
 	{
-		tmpAverage = average(volume, cnt, idx, dur);
+		tmpAverage = average(volume, cnt, i, dur);
 		if (volume[i] >= tmpAverage)
 		{
 			ret++;

@@ -3,7 +3,7 @@
 
 typedef struct _GlobalArgument {
 	int dataCnt = 0;
-	float* data = nullptr;
+	float* data = (float*)calloc(1,sizeof(float));
 }GlobalArgument;
 
 

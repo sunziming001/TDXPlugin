@@ -353,7 +353,7 @@ void AverageLoseRateFromPreHigh(int cnt, float* output, float* high, float* clos
 		highestIdx = findPreHighest(high, cnt, j - obsWidth, j);
 		if (highestIdx >= 1)
 		{
-			preHighOpen = open[highestIdx - 1];
+			preHighOpen = high[highestIdx];
 
 			for (int i = highestIdx; i <= lastHighestIdx; i++)
 			{

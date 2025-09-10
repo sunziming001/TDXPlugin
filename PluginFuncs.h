@@ -40,4 +40,14 @@ void B1ColseVolumeView(int cnt, float* output, float* high, float* close, float*
 void B1ColseVolumeCheck(int cnt, float* output, float* high, float* close, float* volume);
 
 
+/*!
+@breif 前高到当天的日均跌幅
+@param cnt 周期数量
+@param output 输出数组，当天周期有效为1.0，无效为0.0(为了方便检查，如果检查期间有一天无效，则后面的即使缩量也判断为无效)
+@param high 最高价数组
+@param colse 收盘价数组
+*/
+void AverageLoseRateFromPreHigh(int cnt, float* output, float* high, float* close, float* unknown);
+
+
 void LoseShareRate(int cnt, float* output, float* high, float* low, float* close);

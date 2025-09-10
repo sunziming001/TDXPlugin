@@ -333,6 +333,48 @@ void B1ColseVolumeCheck(int cnt, float* output, float* high, float* close, float
 	resetAllArgs();
 }
 
+void AverageLoseRateFromPreHigh(int cnt, float* output, float* high, float* close, float* open)
+{
+	int i = 0;
+	int j = 0;
+	int obsWidth = 40;
+	int highestIdx = -1;
+	int lowestIdx = -1;
+	int lastHighestIdx = cnt - 1;
+	int dayCnt = 0;
+	float rate = 0.0f;
+	float preHighOpen = 0.0f;
+	float curClose = 0.0f;
+
+	resetOutput(output, cnt);
+
+	for (j = cnt - 1; j >= 0; j--)
+	{
+		highestIdx = findPreHighest(high, cnt, j - obsWidth, j);
+
+		for (int i = highestIdx; i <= lastHighestIdx; i++)
+		{
+			if (highestIdx >= 1)
+			{
+				dayCnt = i - highestIdx;
+				if (dayCnt != 0)
+				{
+					preHighOpen = open[highestIdx - 1];
+					curClose = close[i];
+					rate = (preHighOpen - curClose) / preHighOpen * 100;
+
+					output[i] = rate / dayCnt;
+				}
+			}
+			
+		}
+
+		lastHighestIdx = highestIdx;
+		j = highestIdx-1;
+	}
+
+}
+
 void LoseShareRate(int cnt, float* output, float* high, float* low, float* close)
 {
 	int obsWidth = 40;

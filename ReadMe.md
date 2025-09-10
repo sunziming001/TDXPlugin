@@ -59,3 +59,8 @@ J < M3
 	AND REF(RET,0)==1.0 AND REF(RET2,0)>=3.0;
 
 </pre>
+
+7. 新建一个前高日均杀跌强度指数
+<pre>
+	RET:TDXDLL1(4,HIGH,CLOSE,OPEN) COLORRED;
+</pre>

@@ -143,10 +143,14 @@
     <ClInclude Include="Export.h" />
     <ClInclude Include="PluginFuncs.h" />
     <ClInclude Include="PluginTCalcFunc.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="PluginFuncs.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TDXPlugin.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

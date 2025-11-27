@@ -300,7 +300,8 @@ void B1ColseVolumeCheck(int cnt, float* output, float* high, float* close, float
 				preVolume = volume[i - 1];
 				if (curClose < preClose)	//阴量
 				{
-					if (curVolume <= deviation * preVolume && transactionCnt >= minTransactionCnt)
+					if (curVolume <= deviation * preVolume				//缩量判断
+						&& transactionCnt >= minTransactionCnt)			//异动达标
 					{
 						output[i] = 1.0f;
 					}
@@ -315,8 +316,12 @@ void B1ColseVolumeCheck(int cnt, float* output, float* high, float* close, float
 
 				if (i == lastHighestIdx)	//检查最后一根k线
 				{
-					if (volume[i] <= minVolumRate * curHighVolume
+					if (volume[i] <= minVolumRate * curHighVolume		//缩量阴线
 						&& output[i] != 0.0f)
+					{
+						output[i] = 1.0f;
+					}
+					else if (curClose>preClose)							//阳线
 					{
 						output[i] = 1.0f;
 					}

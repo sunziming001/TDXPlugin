@@ -396,15 +396,10 @@ void LoseShareRate(int cnt, float* output, float* high, float* low, float* close
 
 	resetOutput(output, cnt);
 
-	if (g_arg[0].data[0] != 0.0f)
-	{
-		loseRate = g_arg[0].data[0];
-	}
-
 	for (int i = cnt - 1; i >= 0; i--)
 	{
 		highestIdx = findPreHighest(high, cnt, i-obsWidth, i);
-		lowestIdx = findLowest(low, cnt, highestIdx, i);
+		lowestIdx = findLowest(low, cnt, min((highestIdx-obsWidth),0), highestIdx);
 
 		if (highestIdx >= 0 && lowestIdx >= 0)
 		{
